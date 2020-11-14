@@ -4,6 +4,7 @@
     Luís Henrique de C. Corrêa - 2017102465
     Lucas Guimarães Cavalheiro - 2012200347
     Felipe Bento Xavier - 2017102868
+    Eric Mencarini - 2018101101
     
 
 ## Instruções para rodar o projeto:

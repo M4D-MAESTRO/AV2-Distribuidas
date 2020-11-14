@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from 'typeorm';
 import Hardskill from './Hardskill';
 import User from './User';
 
@@ -13,13 +13,17 @@ class Discipline {
     @Column()
     description: String;
 
-    @ManyToMany(() => Hardskill)
+    @ManyToMany(type => Hardskill, hardskill => hardskill.disciplines, { 
+        cascade: true,
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL"
+    })
     @JoinTable()
-    hardskill_id: Hardskill[];
+    hardskills: Hardskill[];
 
     @ManyToMany(() => User)
     @JoinTable()
-    teacher_id: User[];
+    teachers: User[];
 
     @CreateDateColumn()
     created_at: Date;

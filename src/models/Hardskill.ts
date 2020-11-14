@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import Discipline from './Discipline';
 
 @Entity('hardskills')
 class Hardskill {
@@ -10,6 +11,10 @@ class Hardskill {
 
     @Column()
     description: String;
+
+    @ManyToMany(type => Discipline, discipline => discipline.hardskills)
+    @JoinTable()
+    disciplines: Discipline[];
 
     @CreateDateColumn()
     created_at: Date;

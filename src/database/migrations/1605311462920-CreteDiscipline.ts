@@ -25,16 +25,6 @@ export class CreteDiscipline1605311462920 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
-                        name: 'hardskill_id',
-                        type: 'varchar',
-                        isNullable: true
-                    },
-                    {
-                        name: 'teacher_id',
-                        type: 'varchar',
-                        isNullable: true
-                    },
-                    {
                         name: 'created_at',
                         type: 'timestamp',
                         default: 'now()'

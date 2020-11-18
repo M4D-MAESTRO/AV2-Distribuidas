@@ -4,20 +4,14 @@ services:
         build:
             context: .
             dockerfile: api.dockerfile 
-        command: sh -c "/usr/local/bin/migration.sh && npm run dev:server"
+        environment:
+            NODE_ENV: prod
+        command: bash -c "npm run typeorm migration:run && npm run serve"
         ports: 
             - "3333:3333"
         depends_on: 
             - db
-        networks:
-            - default
     db:
         build:
             context: .
             dockerfile: db.dockerfile
-        environment: 
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: docker
-            POSTGRES_DATABASE: av2
-        networks:
-            - default

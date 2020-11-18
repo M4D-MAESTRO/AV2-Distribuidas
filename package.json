@@ -5,8 +5,10 @@
     "license": "MIT",
     "scripts": {
         "build": "tsc",
-        "dev:server": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
-        "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+        "serve": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
+        "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+        "prod:launch": "docker-compose down && docker-compose build && docker-compose up",
+        "dev:db": "docker build . -f db.dockerfile -t av2db && docker run -p 6543:5432 av2db"
     },
     "dependencies": {
         "@typescript-eslint/eslint-plugin": "^3.10.1",

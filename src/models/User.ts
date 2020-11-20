@@ -1,4 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn } from 'typeorm';
+import Curso from './Curso';
+import Discipline from './Discipline';
+import Grupo from './Grupo';
+import SoftSkill from './SoftSkill';
+import Turma from './Turma';
 
 @Entity('users')
 class User {
@@ -12,14 +17,40 @@ class User {
     email: string;
 
     @Column()
+    type: string;
+
+    @Column()
     password: string;
+
+    @ManyToMany(type => Turma, turma => turma.users)
+    @JoinTable()
+    turmas: Turma[];
+
+    @ManyToMany(type => SoftSkill, softSkill => softSkill.alunos)
+    @JoinTable()
+    softSkills: SoftSkill[];
+
+    @ManyToMany(type => Grupo, grupo => grupo.alunos)
+    @JoinTable()
+    grupos: Grupo[];
+
+    @ManyToMany(type => Discipline, discipline => discipline.teachers)
+    @JoinTable()
+    disciplinas: Discipline[];
+
+    @Column({ nullable: true })
+    curso_id: string;
+
+    @ManyToOne(() => Curso)
+    @JoinColumn({ name: 'curso_id' })
+    curso: Curso;
 
     @CreateDateColumn()
     created_at: Date;
 
     @UpdateDateColumn()
     updated_at: Date;
-    
+
 
 }
 
